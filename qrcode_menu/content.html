@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weborigo QR Generator</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Framer Motion -->
+  <script src="https://unpkg.com/framer-motion/dist/framer-motion.umd.js"></script>
+
+  <!-- QR Code Generator -->
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+
+  <style>
+    :root {
+      --brand-orange: #F58220;
+      --brand-dark: #333333;
+    }
+
+    body {
+      background: white;
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: scale(0.95);
+      transition: all 0.4s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-white rounded-2xl shadow-lg p-6 w-full max-w-sm text-center border border-gray-100">
+    <img src="logo_white.png" alt="Weborigo Logo" class="w-40 mx-auto mb-4">
+    <h2 class="text-[var(--brand-orange)] text-xl font-semibold mb-3">QR Code Generator</h2>
+
+    <input id="qrText" type="text" placeholder="Enter URL or text"
+      class="w-full border border-gray-300 rounded-lg p-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[var(--brand-orange)] transition mb-2">
+
+    <select id="qrSize"
+      class="w-full border border-gray-300 rounded-lg p-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[var(--brand-orange)] transition mb-3">
+      <option value="150">Small (150px)</option>
+      <option value="200" selected>Medium (200px)</option>
+      <option value="250">Large (250px)</option>
+    </select>
+
+    <button onclick="generateQR()"
+      class="w-full bg-[var(--brand-orange)] text-white font-semibold py-2 rounded-lg hover:bg-orange-600 transition">
+      Generate QR
+    </button>
+
+    <div id="qrcode" class="flex justify-center items-center mt-6 fade-in"></div>
+
+    <button id="downloadBtn" onclick="downloadQR()"
+      class="hidden mt-4 w-full bg-[var(--brand-dark)] text-white font-semibold py-2 rounded-lg hover:bg-gray-800 transition">
+      Download PNG
+    </button>
+
+    <p class="text-xs text-gray-500 mt-6">© WebOrigo</p>
+  </div>
+
+  <script>
+    let qr;
+
+    function generateQR() {
+      const text = document.getElementById("qrText").value.trim();
+      const size = parseInt(document.getElementById("qrSize").value);
+      const qrContainer = document.getElementById("qrcode");
+      const downloadBtn = document.getElementById("downloadBtn");
+
+      qrContainer.innerHTML = "";
+      qrContainer.classList.remove("visible");
+      downloadBtn.classList.add("hidden");
+
+      if (text) {
+        qr = new QRCode(qrContainer, { text, width: size, height: size });
+        setTimeout(() => {
+          qrContainer.classList.add("visible");
+          downloadBtn.classList.remove("hidden");
+        }, 300);
+      }
+    }
+
+    function downloadQR() {
+      const canvas = document.querySelector("#qrcode canvas");
+      if (canvas) {
+        const link = document.createElement("a");
+        link.download = "weborigo_qr.png";
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+      }
+    }
+  </script>
+</body>
+</html>
