@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import QRCode from "qrcode";
 
+
 const QRGenerator = () => {
   const [text, setText] = useState("");
   const [size, setSize] = useState(200);
