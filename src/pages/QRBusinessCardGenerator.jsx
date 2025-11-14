@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import QRCode from "qrcode";
-import Logo from "../assets/logo_normal.png";
 
 const QRBusinessCardGenerator = () => {
   const [form, setForm] = useState({
@@ -25,18 +24,22 @@ const QRBusinessCardGenerator = () => {
   };
 
   const buildVCard = () => {
-    return `
-BEGIN:VCARD
-VERSION:3.0
-N:${form.name}
-ORG:${form.company}
-TITLE:${form.title}
-TEL;TYPE=CELL:${form.phone}
-EMAIL:${form.email}
-URL:${form.website}
-ADR:${form.address}
-END:VCARD
-`;
+    // Properly formatted vCard 3.0 for better Android/iPhone compatibility
+    const vcard = [
+      'BEGIN:VCARD',
+      'VERSION:3.0',
+      form.name ? `FN:${form.name}` : '',
+      form.name ? `N:${form.name.split(' ').reverse().join(';')};;;` : '',
+      form.company ? `ORG:${form.company}` : '',
+      form.title ? `TITLE:${form.title}` : '',
+      form.phone ? `TEL;TYPE=CELL:${form.phone}` : '',
+      form.email ? `EMAIL:${form.email}` : '',
+      form.website ? `URL:${form.website}` : '',
+      form.address ? `ADR;TYPE=WORK:;;${form.address};;;;` : '',
+      'END:VCARD'
+    ].filter(line => line !== '').join('\r\n');
+
+    return vcard;
   };
 
   const generateQR = async () => {
@@ -47,11 +50,15 @@ END:VCARD
       const pngUrl = await QRCode.toDataURL(vcard, {
         width: actualSize,
         height: actualSize,
+        margin: 2,
+        errorCorrectionLevel: 'M'
       });
 
       const svgString = await QRCode.toString(vcard, {
         type: "svg",
         width: actualSize,
+        margin: 2,
+        errorCorrectionLevel: 'M'
       });
 
       setQrDataUrl(pngUrl);
@@ -85,7 +92,9 @@ END:VCARD
 
   return (
     <div className="bg-white rounded-2xl shadow-lg p-6 w-full max-w-md text-center border border-gray-100 mx-auto my-12">
-      <img src={Logo} alt="Weborigo Logo" className="w-40 mx-auto mb-4" />
+      <div className="w-40 h-12 mx-auto mb-4 bg-[#F58220] rounded-lg flex items-center justify-center">
+        <span className="text-white font-bold text-xl">WebOrigo</span>
+      </div>
       <h2 className="text-[#F58220] text-xl font-semibold mb-4">
         Business Card QR Generator
       </h2>
