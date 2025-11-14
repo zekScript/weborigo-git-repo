@@ -62,67 +62,79 @@ const PasswordGenerator = () => {
   };
 
   return (
-    <div style={{ maxWidth: 400, margin: '0 auto', padding: 20 }}>
-      <h1>Password Generator Page</h1>
-      <form onSubmit={handleGenerate} style={{ marginBottom: 20 }}>
-        <input
-          type="text"
-          value={password}
-          placeholder="Generated Password"
-          readOnly
-          ref={inputRef}
-          style={{
-            width: '70%',
-            marginRight: 8,
-            
-          }}
-        />
-        <button type="button" onClick={handleCopy} disabled={!password} style={{ marginRight: 8 }}>
-          {copied ? 'Copied!' : 'Copy'}
-        </button>
-        <button type="submit" className='bg-gray-700 p-2  text-white'>Generate</button>
-      </form>
-
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-        <label>
-          Password Length
-          <select
-            value={length}
-            onChange={handleLengthChange}
-            style={{ marginLeft: 8, width: 70 }}
+    <div className="min-h-screen flex items-center justify-center  py-8">
+      <div className="w-[75%] bg-white rounded-2xl shadow-lg p-8 border border-orange-200">
+        <h1 className="text-3xl font-bold text-orange-600 mb-6 text-center">Password Generator</h1>
+        <form onSubmit={handleGenerate} className="flex flex-col gap-4 mb-6">
+          <div className="flex items-center gap-2">
+            <input
+              type="text"
+              value={password}
+              placeholder="Generated Password"
+              readOnly
+              ref={inputRef}
+              className={`flex-1 px-3 py-2 rounded-lg border-2 focus:outline-none`}
+            />
+            <button
+              type="button"
+              onClick={handleCopy}
+              disabled={!password}
+              className={`px-3 py-2 rounded-lg font-semibold transition-all duration-200 border border-orange-400 ${copied ? 'bg-orange-400 text-white' : 'bg-white text-orange-600 hover:bg-orange-100'}`}
+            >
+              {copied ? 'Copied!' : 'Copy'}
+            </button>
+          </div>
+          <button
+            type="submit"
+            className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 rounded-lg shadow transition-all duration-200 mt-2"
           >
-            {Array.from({ length: 64 }, (_, i) => (
-              <option key={i + 1} value={i + 1}>{i + 1}</option>
-            ))}
-          </select>
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            id="uppercase"
-            checked={options.uppercase}
-            onChange={handleCheckboxChange}
-          />{' '}
-          Include Uppercase Letters
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            id="numbers"
-            checked={options.numbers}
-            onChange={handleCheckboxChange}
-          />{' '}
-          Include Numbers
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            id="symbols"
-            checked={options.symbols}
-            onChange={handleCheckboxChange}
-          />{' '}
-          Include Symbols
-        </label>
+            Generate
+          </button>
+        </form>
+        <div className="flex flex-col gap-4">
+          <label className="flex items-center gap-3 text-orange-700 font-medium">
+            Password Length
+            <select
+              value={length}
+              onChange={handleLengthChange}
+              className="ml-2 px-2 py-1 rounded border border-orange-300 focus:outline-none focus:ring-2 focus:ring-orange-400 bg-white"
+            >
+              {Array.from({ length: 64 }, (_, i) => (
+                <option key={i + 1} value={i + 1}>{i + 1}</option>
+              ))}
+            </select>
+          </label>
+          <label className="flex items-center gap-2 cursor-pointer">
+            <input
+              type="checkbox"
+              id="uppercase"
+              checked={options.uppercase}
+              onChange={handleCheckboxChange}
+              className="accent-orange-500 w-5 h-5"
+            />
+            <span className="text-orange-700">Include Uppercase Letters</span>
+          </label>
+          <label className="flex items-center gap-2 cursor-pointer">
+            <input
+              type="checkbox"
+              id="numbers"
+              checked={options.numbers}
+              onChange={handleCheckboxChange}
+              className="accent-orange-500 w-5 h-5"
+            />
+            <span className="text-orange-700">Include Numbers</span>
+          </label>
+          <label className="flex items-center gap-2 cursor-pointer">
+            <input
+              type="checkbox"
+              id="symbols"
+              checked={options.symbols}
+              onChange={handleCheckboxChange}
+              className="accent-orange-500 w-5 h-5"
+            />
+            <span className="text-orange-700">Include Symbols</span>
+          </label>
+        </div>
       </div>
     </div>
   );
