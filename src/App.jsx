@@ -5,6 +5,7 @@ import { createBrowserRouter } from 'react-router'
 import PasswordGenerator from './pages/PasswordGenerator'
 import QRGenerator from './pages/QRGenerator'
 import QRBusinessCardGenerator from './pages/QRBusinessCardGenerator'
+import Home from './pages/Home/Home'
 
 function App() {
 
