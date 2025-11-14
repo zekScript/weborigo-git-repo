@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
+import Logo from "../assets/logo_normal.png"
 
 const PasswordGenerator = () => {
   const [options, setOptions] = useState({
@@ -163,6 +164,7 @@ const PasswordGenerator = () => {
   return (
     <div style={{ minHeight: "100vh", display: "flex", justifyContent: "center", alignItems: "center", background: "#f3f4f6" }}>
       <div style={{ width: "400px", background: "#fff", padding: "2rem", borderRadius: "1rem", boxShadow: "0 4px 12px rgba(0,0,0,0.1)" }}>
+        <div><img src={Logo} alt="Weborigo" className="w-[15em] h-[4em] flex mx-auto"/></div>
         <h1 style={{ fontSize: "1.75rem", fontWeight: "bold", color: "#f97316", textAlign: "center", marginBottom: "1rem" }}>Password Generator</h1>
 
         <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
