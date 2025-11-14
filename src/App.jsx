@@ -4,6 +4,7 @@ import './App.css'
 import { createBrowserRouter } from 'react-router'
 import PasswordGenerator from './pages/PasswordGenerator'
 import QRGenerator from './pages/QRGenerator'
+import QRBusinessCardGenerator from './pages/QRBusinessCardGenerator'
 
 function App() {
 
@@ -15,6 +16,10 @@ function App() {
     {
       element: <QRGenerator/>, 
       path: "/qr-code-generator"
+    },
+    {
+      element: <QRBusinessCardGenerator/>,
+      path: "/qr-business-card-generator"
     },
     {
       element: <PasswordGenerator/>,
