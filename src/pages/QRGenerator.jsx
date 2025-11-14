@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import QRCode from "qrcode";
+import Logo from "../assets/logo_normal.png"
 
 
 const QRGenerator = () => {
@@ -28,7 +29,7 @@ const QRGenerator = () => {
 
   return (
     <div className="bg-white rounded-2xl shadow-lg p-6 w-full max-w-sm text-center border border-gray-100 mx-auto my-12">
-      <img src="logo_white.png" alt="Weborigo Logo" className="w-40 mx-auto mb-4" />
+      <img src={Logo} alt="Weborigo Logo" className="w-40 mx-auto mb-4" />
       <h2 className="text-[#F58220] text-xl font-semibold mb-3">QR Code Generator</h2>
 
       <input

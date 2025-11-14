@@ -3,8 +3,7 @@ import { RouterProvider } from 'react-router-dom'
 import './App.css'
 import { createBrowserRouter } from 'react-router'
 import PasswordGenerator from './pages/PasswordGenerator'
-import QRFrame from '../qrcode_menu/iframe'
-import QRGenerator from '../qrcode_menu/content'
+import QRGenerator from './pages/QRGenerator'
 
 function App() {
 
@@ -15,7 +14,6 @@ function App() {
     },
     {
       element: <QRGenerator/>, 
-      // element: <QRFrame />,
       path: "/qr-code-generator"
     },
     {
