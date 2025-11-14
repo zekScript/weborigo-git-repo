@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import QRCode from "qrcode";
+import Logo from "../assets/logo_normal.png"
 
 const QRBusinessCardGenerator = () => {
   const [form, setForm] = useState({
@@ -92,8 +93,8 @@ const QRBusinessCardGenerator = () => {
 
   return (
     <div className="bg-white rounded-2xl shadow-lg p-6 w-full max-w-md text-center border border-gray-100 mx-auto my-12">
-      <div className="w-40 h-12 mx-auto mb-4 bg-[#F58220] rounded-lg flex items-center justify-center">
-        <span className="text-white font-bold text-xl">WebOrigo</span>
+      <div className="w-40 h-12 mx-auto mb-4 rounded-lg flex items-center justify-center">
+        <img src={Logo} alt="Weborigo" />
       </div>
       <h2 className="text-[#F58220] text-xl font-semibold mb-4">
         Business Card QR Generator
